@@ -4,11 +4,12 @@ on:
   workflow_dispatch:
 
 jobs:
-  build:
+  infrastructure:
+    name: "Infrastructure"
     runs-on: ubuntu-latest
 
     steps:
-      - name: Deploy Infra For Child 02
+      - name: Build & Deploy Infra For Child 02
         run: |
           curl -L \
           -X POST \
@@ -18,7 +19,13 @@ jobs:
           -d '{"ref":"${{ github.ref_name }}"}' \
           https://api.github.com/repos/amalay/parent/actions/workflows/test-cicd-child-02-infra.yml/dispatches
 
-      - name: Deploy App For Child 02
+  application:
+    name: "Application"
+    needs: [infrastructure]
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Build & Deploy App For Child 02
         run: |
           curl -L \
           -X POST \

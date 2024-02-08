@@ -1,8 +1,8 @@
 name: CI/CD - Child 02
 
 on:
-  push:
-    branches: ["main"]
+  # push:
+  #   branches: ["main"]
 
   workflow_dispatch:
 
@@ -11,9 +11,12 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v3
+      # - uses: actions/checkout@v3
+
+      # - name: Print
+      #   run: |
+      #     echo Execute child 02 ci/cd pipeline.
+      #     echo Testing child 02 ci/cd pipeline.
 
       - name: Print
-        run: |
-          echo Execute child 02 ci/cd pipeline.
-          echo Testing child 02 ci/cd pipeline.
+        run: echo Hello child 02!

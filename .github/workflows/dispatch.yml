@@ -1,0 +1,32 @@
+name: Dispatch
+
+on:
+  push:
+    branches: ["main"]
+
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Dispatch Child 01
+        run: |
+          curl -L \
+          -X POST \
+          -H "Accept: application/vnd.github.everest-preview+json" \
+          -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
+          -H "Authentication: Bearer ${{ secrets.GITHUB_TOKEN }}" \
+          -d '{"ref":"${{ github.ref_name }}"}' \
+          https://api.github.com/repos/amalay/parent/actions/workflows/test-cicd-child-01.yml/dispatches
+
+      # - name: Dispatch Child 02
+      #   run: |
+      #     curl -L \
+      #     -X POST \
+      #     -H "Accept: application/vnd.github.everest-preview+json" \
+      #     -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
+      #     -H "Authentication: Bearer ${{ secrets.GITHUB_TOKEN }}" \
+      #     -d '{"ref":"${{ github.ref_name }}"}' \
+      #     https://api.github.com/repos/amalay/parent/actions/workflows/test-cicd-child-02.yml/dispatches
